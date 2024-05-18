@@ -37,17 +37,15 @@ class Solution
     public static int n,k;
 	public static int result;
 	public static int[] arr;
-	public static boolean[] visited;
 	
-	public static void dfs(int idx,int sum) {
-		if(idx == n) {
+	public static void dfs(int depth, int sum) {
+		if(depth == n) {
 			if(sum == k) result++;
 			return;
 		}
 		
-		dfs(idx+1, sum);
-		sum += arr[idx];
-		dfs(idx+1, sum);
+		dfs(depth+1, sum + arr[depth]);
+		dfs(depth+1, sum);
 	}
 	public static void main(String args[]) throws Exception
 	{
@@ -64,17 +62,17 @@ class Solution
 		   표준입력 System.in 으로부터 스캐너를 만들어 데이터를 읽어옵니다.
 		 */
 		Scanner sc = new Scanner(System.in);
-		int testCase = sc.nextInt();
-		for(int tc=1;tc<=testCase;tc++) {
-			result = 0;
+		int T = sc.nextInt();
+		for(int tc=1;tc<=T;tc++) {
 			n = sc.nextInt();
 			k = sc.nextInt();
 			arr = new int[n];
-			visited = new boolean[n];
+			result = 0;
+			
 			for(int i=0;i<n;i++) {
 				arr[i] = sc.nextInt();
 			}
-			dfs(0, 0);
+			dfs(0,0);
 			System.out.println("#" + tc + " " + result);
 		}
 	}
