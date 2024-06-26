@@ -49,31 +49,33 @@ class Solution
 		   표준입력 System.in 으로부터 스캐너를 만들어 데이터를 읽어옵니다.
 		 */
 		Scanner sc = new Scanner(System.in);
-		int testCase = sc.nextInt();
-        for(int tc = 1; tc<=testCase;tc++) {
+		int T = sc.nextInt();
+        for(int tc=1;tc<=T;tc++) {
             int n = sc.nextInt();
             int[][] map = new int[n][n];
-            int[][] result = new int[n][n];
             for(int i=0;i<n;i++) {
                 for(int j=0;j<n;j++) {
                     map[i][j] = sc.nextInt();
                 }
             }
-            System.out.println("#" + tc + " ");
+
+            System.out.println("#" + tc);
             for(int i=0;i<n;i++) {
                 for(int j=0;j<n;j++) {
-                    System.out.print(map[n-j-1][i]);
+                    System.out.print(map[n-1-j][i]);
                 }
                 System.out.print(" ");
                 for(int j=0;j<n;j++) {
-                    System.out.print(map[n-i-1][n-j-1]);
+                    System.out.print(map[n-1-i][n-1-j]);
                 }
                 System.out.print(" ");
                 for(int j=0;j<n;j++) {
-                    System.out.print(map[j][n-i-1]);
+                    System.out.print(map[j][n-1-i]);
                 }
+                System.out.print(" ");
                 System.out.println();
             }
+
         }
 	}
 }
