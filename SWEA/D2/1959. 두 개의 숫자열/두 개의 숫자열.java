@@ -27,7 +27,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////////
 import java.util.Scanner;
 import java.io.FileInputStream;
-import java.util.*;
 
 /*
    사용하는 클래스명이 Solution 이어야 하므로, 가급적 Solution.java 를 사용할 것을 권장합니다.
@@ -50,38 +49,38 @@ class Solution
 		   표준입력 System.in 으로부터 스캐너를 만들어 데이터를 읽어옵니다.
 		 */
 		Scanner sc = new Scanner(System.in);
-		int testCase = sc.nextInt();
-        for(int tc = 1; tc<=testCase;tc++) {
-            ArrayList<Integer> graph = new ArrayList<>();
-            int n =sc.nextInt();
-            int m =sc.nextInt();
-            int[] arrN = new int[n];
-            int[] arrM = new int[m];
+		int T = sc.nextInt();
+        for(int tc=1;tc<=T;tc++) {
+            int n = sc.nextInt();
+            int m = sc.nextInt();
+            int[] a = new int[n];
+            int[] b = new int[m];
             for(int i=0;i<n;i++) {
-                arrN[i] = sc.nextInt();
+                a[i] = sc.nextInt();
             }
             for(int i=0;i<m;i++) {
-                arrM[i] = sc.nextInt();
+                b[i] = sc.nextInt();
             }
-
-            int num;
-            int x = Math.min(n,m);
-            int gap = Math.abs(n-m);
-            for(int i=0;i<gap+1;i++) {
-                int sum = 0;
-                for(int j=0;j<x;j++) {
-                    if(n > m) {
-                        num = arrN[i+j] * arrM[j];
+            int result = 0;
+            int sum;
+            if(n > m) {
+                for(int i=0;i<n-m+1;i++) {
+                    sum = 0;
+                    for(int j=0;j<m;j++) {
+                        sum += a[j+i] * b[j];
                     }
-                    else {
-                        num = arrM[i+j] * arrN[j];
-                    }
-                    sum += num;
+                    result = Math.max(result, sum);
                 }
-                graph.add(sum);
+            }else {
+                for(int i=0;i<m-n+1;i++) {
+                    sum = 0;
+                    for(int j=0;j<n;j++) {
+                        sum += a[j] * b[j+i];
+                    }
+                    result = Math.max(result, sum);
+                }
             }
-            Collections.sort(graph);
-            System.out.println("#" + tc + " " + graph.get(graph.size()-1));
+            System.out.println("#" + tc + " " + result);
         }
 	}
 }
