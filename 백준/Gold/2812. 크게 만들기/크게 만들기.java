@@ -17,40 +17,40 @@ public class Main {
         char[] str = br.readLine().toCharArray();
 
         //stack 버전
-        for(int i = 0; i <str.length; i++){
-        	while(!stack.empty() && k > 0 && stack.peek() < str[i]){
-                stack.pop();
-                k--;
-            }
-            stack.push(str[i]);
-        }
-        
-       
-        while(k>0 && stack.size() != len) {
-        	stack.pop();
-        	k--;
-        }
-        
-        for(char c : stack) {
-        	sb.append(c);
-        }
-        
-        System.out.println(sb);
-        
-        //Deque 버전
-//        for(int i=0;i<str.length;i++) {
-//        	while(!dq.isEmpty() && k>0 && dq.peekLast() < str[i]) {
-//        		dq.removeLast();
-//        		k--;
-//        	}
-//        	dq.addLast(str[i]);
+//        for(int i = 0; i <str.length; i++){
+//        	while(!stack.empty() && k > 0 && stack.peek() < str[i]){
+//                stack.pop();
+//                k--;
+//            }
+//            stack.push(str[i]);
 //        }
 //        
-//        while(dq.size() > k) {
-//        	sb.append(dq.removeFirst());
+//       
+//        while(k>0 && stack.size() != len) {
+//        	stack.pop();
+//        	k--;
 //        }
-//
+//        
+//        for(char c : stack) {
+//        	sb.append(c);
+//        }
+//        
 //        System.out.println(sb);
+        
+        //Deque 버전
+        for(int i=0;i<str.length;i++) {
+        	while(!dq.isEmpty() && k>0 && dq.peekLast() < str[i]) {
+        		dq.removeLast();
+        		k--;
+        	}
+        	dq.addLast(str[i]);
+        }
+        
+        while(dq.size() > k) {
+        	sb.append(dq.removeFirst());
+        }
+
+        System.out.println(sb);
         
     }
 }
