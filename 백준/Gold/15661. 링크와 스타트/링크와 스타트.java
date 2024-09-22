@@ -29,16 +29,13 @@ public class Main {
 		int t1 = 0;
 		int t2 = 0;
 		for(int i=0;i<n;i++) {
-			if((team & 1<<i) == 0) continue; 
-			for(int j=0;j<n;j++) {
-				if((team & (1<<j)) == 1<<j) t1+= w[i][j];
-			}
-		}
-		
-		for(int i=0;i<n;i++) {
-			if((team & 1<<i) == 1<<i) continue;
-			for(int j=0;j<n;j++) {
-				if((team & (1<<j)) == 0) t2 += w[i][j];
+			for(int j=i+1;j<n;j++) {
+				if((team & (1<<i)) == 0 && (team & (1<<j)) ==0) {
+					t1 += w[i][j] + w[j][i];
+				}
+				else if((team & (1<<i)) != 0 && (team & (1<<j)) != 0) {
+					t2 += w[i][j] + w[j][i];
+				}
 			}
 		}
 		
