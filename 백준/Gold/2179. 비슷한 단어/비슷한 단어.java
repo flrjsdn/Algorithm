@@ -22,7 +22,9 @@ public class Main {
 		int cnt = 0;
 		
 		for(int i=0;i<n;i++) {
+			if(sList[i].length() < cnt) continue;
 			for(int j=i+1;j<n;j++) {
+				if(sList[j].length() < cnt) continue;
 				int min = Math.min(sList[i].length(), sList[j].length());
 				
 				int c = 0;
