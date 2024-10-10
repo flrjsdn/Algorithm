@@ -9,7 +9,8 @@ public class Main {
     	return Integer.parseInt(st.nextToken());
     }
     
-    static ArrayList<Integer> arr;
+    static StringBuilder sb = new StringBuilder();
+    static int cnt;
     static int[] makeTable(String pattern) {
     	int n = pattern.length();
     	int[] table = new int[n];
@@ -45,7 +46,8 @@ public class Main {
     		// 글자가 대응될 경우	
     		if(parent.charAt(i) == pattern.charAt(idx)) {
     			if(idx == n2-1) {
-    				arr.add(i-idx+1);
+    				sb.append(i-idx+1).append(" ");
+    				cnt++;
     				idx =table[idx];
     			}else {
     				idx += 1;
@@ -56,11 +58,9 @@ public class Main {
     public static void main(String[] args) throws IOException {
         String str = br.readLine();
         String pattern = br.readLine();
-        arr = new ArrayList<>();
+        cnt = 0;
         KMP(str, pattern);
-        System.out.println(arr.size());
-        for(int n : arr) {
-        	System.out.print(n + " ");
-        }
+        System.out.println(cnt);
+        System.out.println(sb);
     }
 }
