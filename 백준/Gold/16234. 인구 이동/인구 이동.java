@@ -48,7 +48,7 @@ public class Main {
 		}
 		sum /= arr.size();
 		for(int[] now : arr) {
-			newMap[now[0]][now[1]] = sum;
+			map[now[0]][now[1]] = sum;
 		}
 	}
 	
@@ -68,10 +68,6 @@ public class Main {
 		while(true) {
 			flag = false;
 			visited = new boolean[n][n];
-			newMap = new int[n][n];
-			for(int i=0;i<n;i++) {
-				newMap[i] = Arrays.copyOf(map[i], n);
-			}
 			for(int i=0;i<n;i++) {
 				for(int j=0;j<n;j++) {
 					if(!visited[i][j]) {
@@ -81,9 +77,6 @@ public class Main {
 			}
 			
 			if(!flag) break;
-			for(int i=0;i<n;i++) {
-				map[i] = Arrays.copyOf(newMap[i], n);
-			}
 			result += 1;
 		}
 		System.out.println(result);
