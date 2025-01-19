@@ -12,11 +12,11 @@ public class Main {
 	
 
 	static class Node {
-		int t;
-		int c;
-		int cPrice;
+		long t;
+		long c;
+		long cPrice;
 		
-		public Node(int t, int c,int cPrice) {
+		public Node(long t, long c,long cPrice) {
 			this.t = t;
 			this.c = c;
 			this.cPrice = cPrice;
@@ -27,20 +27,22 @@ public class Main {
 		int n = read();
 		int m = read();
 		
-		int[] streetCount = new int[n-1];
-		int start = read();
-		for(int i=0;i<m-1;i++) {
-			int next = read();
-			if(start < next) {
-				for(int j=start;j<next;j++) {
-					streetCount[j-1]++;
-				}
-			}else {
-				for(int j=start-1;j>=next;j--) {
-					streetCount[j-1]++;
-				}
+		int[] streetCount = new int[n];
+		int[] streets = new int[m];
+		for(int i=0;i<m;i++) {
+			streets[i] = read();
+		}
+		for(int i=1;i<m;i++) {
+			int start = streets[i-1];
+			int next = streets[i];
+			
+			if(start > next) {
+				int tmp = start;
+				start = next;
+				next = tmp;
 			}
-			start = next;
+			streetCount[start-1]++;
+			streetCount[next-1]--;
 		}
 		
 		ArrayList<Node> arr = new ArrayList<>();
@@ -50,12 +52,13 @@ public class Main {
 			int c = read();
 			arr.add(new Node(a,b,c));
 		}
-		int sum = 0;
+		long sum = 0;
+		long pSum = 0;
 		for(int i=0;i<n-1;i++) {
-			int tSum = streetCount[i] * arr.get(i).t;
-			int cSum = streetCount[i] * arr.get(i).c + arr.get(i).cPrice;
-			if(tSum > cSum) sum += cSum;
-			else sum += tSum;
+			pSum += streetCount[i];
+			long tSum = pSum * arr.get(i).t;
+			long cSum = pSum * arr.get(i).c + arr.get(i).cPrice;
+			sum += Math.min(tSum, cSum);
 		}
 		System.out.println(sum);
     }
