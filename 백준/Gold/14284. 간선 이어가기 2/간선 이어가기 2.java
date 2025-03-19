@@ -51,7 +51,7 @@ public class Main {
 		
 		while(!pq.isEmpty()) {
 			Node now = pq.poll();
-			
+			if(now.index == t) break;
 			if(dist[now.index] < now.weight) continue;
 			
 			for(Node next : graph.get(now.index)) {
