@@ -64,21 +64,27 @@ class Main {
                 pq.add(new Node(i+1, j+1, d));
             }
         }
+        int cnt = 1;
         for(int i=0;i<m;i++) {
             int a = read();
             int b = read();
-            unionParent(a,b);
+            if(findParent(a) != findParent(b)) {
+                unionParent(a,b);
+                cnt++;
+            }
         }
 
         double ans = 0;
         while(!pq.isEmpty()) {
             Node now = pq.poll();
 
+            if(cnt == n) break;
             int a = findParent(now.left);
             int b = findParent(now.right);
             if(a != b) {
                 unionParent(a,b);
                 ans += now.w;
+                cnt++;
             }
         }
         System.out.printf("%.2f", ans);
