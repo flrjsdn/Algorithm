@@ -48,25 +48,25 @@ class Main {
             parent[i] = i;
         }
 
+        cnt = 1;
         for(int i=0;i<m;i++) {
-            int a = read();
-            int b = read();
-            unionParent(a,b);
+            int a = findParent(read());
+            int b = findParent(read());
+            if(a != b) {
+                unionParent(a,b);
+                cnt++;
+            }
         }
 
         PriorityQueue<Node> pq = new PriorityQueue<>((o1,o2) -> o1.w - o2.w);
-        cnt = 1;
         for(int i=1;i<=n;i++) {
             for(int j=1;j<=n;j++) {
                 int w = read();
-                if(i==1) continue;
-                if(i != 1 && j != 1 && i != j) {
-                    int a = findParent(i);
-                    int b = findParent(j);
-                    if(a != b) {
-                        pq.add(new Node(i,j,w));
-                        cnt++;
-                    }
+                if(i >= j || i == 1 || j == 1) continue;
+                int a = findParent(i);
+                int b = findParent(j);
+                if(a != b) {
+                    pq.add(new Node(i,j,w));
                 }
             }
         }
