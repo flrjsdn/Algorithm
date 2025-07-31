@@ -27,8 +27,8 @@ class Main {
         for(int i=0;i<m;i++) {
             int a = read();
             int b = read();
-            dist[a][b] = 2;
-            dist[b][a] = 2;
+            dist[a][b] = 1;
+            dist[b][a] = 1;
         }
 
         for(int k=1;k<=n;k++) {
@@ -43,8 +43,8 @@ class Main {
         int x = 0, y = 0;
         int sum = Integer.MAX_VALUE;
         for(int i=1;i<=n;i++) {
-            int cal = 0;
             for(int j=i+1;j<=n;j++) {
+                int cal = 0;
                 for(int k=1;k<=n;k++) {
                     cal += Math.min(dist[i][k], dist[j][k]);
                 }
@@ -52,9 +52,9 @@ class Main {
                     x = i;
                     y = j;
                     sum = cal;
-                }
+                } 
             }
         }
-        System.out.println(x + " " + y + " " + sum);
+        System.out.println(x + " " + y + " " + sum*2);
     }
 }
