@@ -31,6 +31,10 @@ class Main {
                 while(start < end) {
                     int sum = arr[start] + arr[end];
                     ans = Math.min(ans, Math.abs(sum-snow));
+                    if(snow == sum) {
+                        System.out.println(0);
+                        return;
+                    }
                     if(snow > sum) start++;
                     else end--;
                 }
