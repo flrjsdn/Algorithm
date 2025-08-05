@@ -23,20 +23,12 @@ class Main {
         Arrays.sort(arr);
 
         int ans = Integer.MAX_VALUE;
-        for(int i=0;i<n-1;i++) {
-            for(int j=i+1;j<n;j++) {
-                int start = 0;
-                int end = arr.length - 1;
+        for(int i=0;i<n;i++) {
+            for(int j=i+3;j<n;j++) {
+                int start = i+1;
+                int end = j-1;
                 int snow = arr[i] + arr[j];
                 while(start < end) {
-                    if(start == i || start==j) {
-                        start++;
-                        continue;
-                    }
-                    if(end == j || end ==i) {
-                        end--;
-                        continue;
-                    }
                     int sum = arr[start] + arr[end];
                     ans = Math.min(ans, Math.abs(sum-snow));
                     if(snow > sum) start++;
