@@ -31,8 +31,8 @@ class Main {
 
     static int n,m, A, B;
     static long C;
+    static long[] calList;
     static long[] dist;
-    static boolean[] visited;
     static final long INF = (long) 1e16;
     static boolean ans;
     static ArrayList<ArrayList<Node>> graph = new ArrayList<ArrayList<Node>>();
@@ -40,7 +40,7 @@ class Main {
     static void dijk(int start) {
         PriorityQueue<Node> pq = new PriorityQueue<>();
         dist[start] = 0;
-        visited[start] = true;
+        calList[start] = 0;
         pq.add(new Node(start, 0, C));
 
         while(!pq.isEmpty()) {
@@ -54,8 +54,9 @@ class Main {
 
             for(Node next : graph.get(now.index)) {
                 if(now.total - next.w < 0) continue;
-                if(!visited[next.index]) {
-                    visited[next.index] = true;
+                long cal = next.w + calList[now.index];
+                if(calList[next.index] > cal) {
+                    calList[next.index] = cal;
                     dist[next.index] = Math.max(next.w, dist[now.index]);
                     pq.add(new Node(next.index, (int) dist[next.index], now.total-next.w));
                 }
@@ -74,8 +75,9 @@ class Main {
             graph.add(new ArrayList<>());
         }
         dist = new long[n+1];
-        visited = new boolean[n+1];
+        calList = new long[n+1];
         Arrays.fill(dist, INF);
+        Arrays.fill(calList, INF);
 
         for(int i=0;i<m;i++) {
             st = new StringTokenizer(br.readLine());
