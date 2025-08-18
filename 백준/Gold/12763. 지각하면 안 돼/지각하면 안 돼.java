@@ -43,6 +43,8 @@ class Main {
 
         while(!pq.isEmpty()) {
             Node now = pq.poll();
+            
+            if(now.index == N) break;
 
             if(dist[now.index][now.time] < now.w) continue;
 
