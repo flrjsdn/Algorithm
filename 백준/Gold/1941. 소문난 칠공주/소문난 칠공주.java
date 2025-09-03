@@ -13,19 +13,14 @@ class Main {
     static int[] dy = {0,0,1,-1};
     static boolean[][] visited;
 
-    static void backtracking(int index, int cnt) {
+    static void backtracking(int index, int cnt, int yeon) {
 
+        if(yeon >= 4) return;
+        
         if(cnt == 7) {
-            out:for(int i=0;i<N;i++) {
-                for(int j=0;j<N;j++) {
-                    if(visited[i][j]) {
-                        if(bfs(i,j)) {
-                            ans++;
-                            break out;
-                        }
-                    }
-                }
-            }
+            int x = (index-1) / N;
+            int y = (index-1) % N;
+            if(bfs(x,y)) ans++;
             return;
         }
         
@@ -34,7 +29,8 @@ class Main {
             int col = i % 5;
             if(!visited[row][col]) {
                 visited[row][col] = true;
-                backtracking(i+1, cnt+1);
+                if(map[row][col] == 'Y') backtracking(i+1,cnt+1,yeon+1);
+                else backtracking(i+1,cnt+1,yeon);
                 visited[row][col] = false;
             }
         }
@@ -77,7 +73,7 @@ class Main {
         }
 
         ans = 0;
-        backtracking(0,0);
+        backtracking(0,0,0);
         System.out.println(ans);
     }
 }
