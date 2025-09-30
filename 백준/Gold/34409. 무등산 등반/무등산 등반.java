@@ -33,6 +33,7 @@ class Main {
         while(!q.isEmpty()) {
             int[] now = q.poll();
 
+            if(now[2] < dist[now[0]][now[1]]) continue;
             if(now[0] == dX && now[1] == dY) {
                 ans = Math.min(ans, now[2]);
                 return;
